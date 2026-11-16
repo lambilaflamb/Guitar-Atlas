@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr" data-theme="auto">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f1115"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Guitar Atlas">
+<link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><link rel="stylesheet" href="styles.css">
+<title>Guitar Atlas</title>
+</head>
+<body>
+<div class="app-shell">
+<header class="topbar"><div><p class="eyebrow">GUITAR ATLAS</p><h1>Toolbox guitare</h1></div><div class="top-actions"><button class="icon-btn" id="libraryBtn" aria-label="Favoris et historique" title="Favoris">♡</button><button class="icon-btn" id="prefsBtn" aria-label="Préférences" title="Préférences">⚙</button><button class="icon-btn" id="installBtn" hidden>⇩</button></div></header>
+<section class="quick-search"><label class="searchbox"><span>⌕</span><input id="quickSearch" type="search" autocomplete="off" placeholder="Cmaj7, lydien dominant, arpège…"></label><div id="searchSuggestions" class="search-suggestions" hidden></div></section>
+<button class="tuning-bar" id="tuningQuickBtn"><span>Accordage</span><strong id="tuningQuickName">Standard</strong><small id="tuningQuickNotes">E A D G B E</small><b>›</b></button>
+<main>
+<section class="screen active" data-screen="chords">
+<div class="section-head"><div><p class="eyebrow">01 · ACCORDS</p><h2 id="chordTitle"></h2></div><div class="head-actions"><button class="text-btn strong" id="addChordBtn">+ Ajouter</button><button class="favorite-btn" id="chordFavorite">♡</button></div></div>
+<div class="root-strip" id="chordRoots"></div>
+<div class="field-row"><label class="field"><span>Type</span><select id="chordTypeSelect"></select></label><button class="step-btn" id="chordPrevRoot">−½</button><button class="step-btn" id="chordNextRoot">+½</button></div>
+<article class="hero-card"><div class="hero-topline"><span id="chordFormula"></span><button class="play-btn" id="playChord">▶ Écouter</button></div><div class="note-pills" id="chordNotes"></div><div class="interval-line" id="chordIntervals"></div></article>
+<article class="panel"><div class="panel-head"><div><h3>Position</h3><p id="voicingMeta" class="muted"></p></div><div class="pager"><button id="voicingPrev">‹</button><span id="voicingCounter"></span><button id="voicingNext">›</button></div></div><div id="chordDiagram" class="chord-diagram"></div><div id="voicingLegend" class="legend-row"></div></article>
+<article class="panel"><div class="panel-head wrap"><div><h3>Manche</h3><p class="muted">Aigu en haut · grave en bas</p></div><div class="panel-actions"><button class="text-btn strong" id="chordFullscreen">↗ Grand manche</button><div class="segmented" id="chordLabelMode"><button data-mode="notes">Notes</button><button data-mode="intervals">Intervalles</button><button data-mode="fingers">Doigté</button></div></div></div><div id="chordFretboard" class="fretboard-wrap"></div></article>
+<article class="panel"><div class="panel-head"><div><h3>Gammes utilisables</h3><p class="muted">Suggestions théoriques et compatibles avec l’accord</p></div></div><div id="chordScaleSuggestions" class="chip-list"></div></article>
+</section>
+
+<section class="screen" data-screen="scales">
+<div class="section-head"><div><p class="eyebrow">02 · GAMMES</p><h2 id="scaleTitle"></h2></div><div class="head-actions"><button class="text-btn strong" id="addScaleBtn">+ Ajouter</button><button class="favorite-btn" id="scaleFavorite">♡</button></div></div>
+<div class="root-strip" id="scaleRoots"></div>
+<div class="field-row"><label class="field"><span>Gamme / mode</span><select id="scaleTypeSelect"></select></label><button class="step-btn" id="scalePrevRoot">−½</button><button class="step-btn" id="scaleNextRoot">+½</button></div>
+<article class="hero-card"><div class="hero-topline"><span id="scaleFormula"></span><button class="play-btn" id="playScale">▶ Écouter</button></div><div class="note-pills" id="scaleNotes"></div><div class="interval-line" id="scaleIntervals"></div></article>
+<article class="panel"><div class="panel-head wrap"><div><h3>Manche complet</h3><p class="muted">Aigu en haut · grave en bas</p></div><div class="panel-actions"><button class="text-btn strong" id="scaleFullscreen">↗ Grand manche</button><div class="segmented" id="scaleLabelMode"><button data-mode="notes">Notes</button><button data-mode="intervals">Degrés</button><button data-mode="none">Masquer</button></div></div></div><div id="scaleFretboard" class="fretboard-wrap"></div></article>
+<article class="panel"><div class="panel-head"><div><h3>Positions</h3><p id="scalePositionMeta" class="muted"></p></div><div class="pager"><button id="scalePosPrev">‹</button><span id="scalePosCounter"></span><button id="scalePosNext">›</button></div></div><div id="scalePositionBoard" class="fretboard-wrap"></div></article>
+<article class="panel"><div class="panel-head"><div><h3>Harmonisation</h3><p class="muted">Accords diatoniques cliquables</p></div><div class="segmented" id="harmonyMode"><button data-harmony="triad">Triades</button><button data-harmony="seventh">7e</button></div></div><div id="scaleHarmony" class="harmony-grid"></div></article>
+</section>
+
+<section class="screen" data-screen="arpeggios">
+<div class="section-head"><div><p class="eyebrow">03 · ARPÈGES</p><h2 id="arpTitle"></h2></div><button class="favorite-btn" id="arpFavorite">♡</button></div>
+<div class="root-strip" id="arpRoots"></div>
+<div class="field-row"><label class="field"><span>Type d’arpège</span><select id="arpTypeSelect"></select></label><button class="step-btn" id="arpPrevRoot">−½</button><button class="step-btn" id="arpNextRoot">+½</button></div>
+<article class="hero-card"><div class="hero-topline"><span id="arpFormula"></span><button class="play-btn" id="playArp">▶ Écouter</button></div><div class="note-pills" id="arpNotes"></div><div class="interval-line" id="arpIntervals"></div></article>
+<article class="panel"><div class="panel-head wrap"><div><h3>Manche complet</h3><p class="muted">Aigu en haut · grave en bas</p></div><div class="panel-actions"><button class="text-btn strong" id="arpFullscreen">↗ Grand manche</button><div class="segmented" id="arpLabelMode"><button data-mode="notes">Notes</button><button data-mode="intervals">Intervalles</button><button data-mode="none">Masquer</button></div></div></div><div id="arpFretboard" class="fretboard-wrap"></div></article>
+<article class="panel"><div class="panel-head"><div><h3>Positions</h3><p id="arpPositionMeta" class="muted"></p></div><div class="pager"><button id="arpPosPrev">‹</button><span id="arpPosCounter"></span><button id="arpPosNext">›</button></div></div><div id="arpPositionBoard" class="fretboard-wrap"></div></article>
+</section>
+
+<section class="screen" data-screen="reverse">
+<div class="section-head"><div><p class="eyebrow">04 · RECHERCHE INVERSÉE</p><h2>Identifier par les notes</h2></div><button class="text-btn" id="clearReverse">Effacer</button></div>
+<article class="panel"><h3>Sélectionne les notes</h3><p class="muted">Accords, gammes et arpèges · jusqu’à 12 notes.</p><div id="reverseNotes" class="reverse-notes"></div><div class="selected-line"><span class="muted">Sélection</span><strong id="reverseSelection">—</strong></div><div class="segmented reverse-filter" id="reverseFilter"><button data-filter="all">Tout</button><button data-filter="chord">Accords</button><button data-filter="scale">Gammes</button><button data-filter="arpeggio">Arpèges</button></div></article>
+<article class="panel"><div class="panel-head"><div><h3>Résultats</h3><p class="muted" id="reverseCount"></p></div></div><div id="reverseResults" class="reverse-results"></div></article>
+</section>
+
+<section class="screen" data-screen="tools">
+<div class="section-head"><div><p class="eyebrow">05 · OUTILS</p><h2>Accordeur & métronome</h2></div></div>
+<article class="panel tuner-card"><div class="panel-head"><div><h3>Accordeur chromatique</h3><p class="muted">Micro de l’iPhone · référence réglable</p></div><button class="primary-btn" id="tunerToggle">Démarrer</button></div>
+<div class="tuner-display"><div class="tuner-note" id="tunerNote">—</div><div class="tuner-freq" id="tunerFreq">Micro désactivé</div><div class="tuner-meter"><div class="tuner-center"></div><div class="tuner-needle" id="tunerNeedle"></div></div><div class="tuner-cents" id="tunerCents">0 cents</div></div>
+<div class="settings-row compact"><div><strong>La4</strong><p class="muted">Fréquence de référence</p></div><div class="number-control"><button id="a4Minus">−</button><strong id="a4Value">440</strong><button id="a4Plus">+</button></div></div><div class="open-string-row" id="tunerStrings"></div></article>
+<article class="panel metronome-card"><div class="panel-head"><div><h3>Métronome</h3><p class="muted">Tap tempo, signatures et subdivisions</p></div><button class="primary-btn" id="metroToggle">▶ Start</button></div>
+<div class="metro-main"><button class="tempo-minus" id="bpmMinus">−</button><div><strong class="bpm" id="bpmValue">100</strong><span>BPM</span></div><button class="tempo-plus" id="bpmPlus">+</button></div><input class="tempo-slider" id="bpmSlider" type="range" min="30" max="300" value="100">
+<div class="metro-pulse" id="metroPulse"></div><div class="tool-grid"><label class="field"><span>Mesure</span><select id="timeSigSelect"><option value="2">2/4</option><option value="3">3/4</option><option value="4" selected>4/4</option><option value="5">5/4</option><option value="6">6/8</option><option value="7">7/8</option><option value="9">9/8</option><option value="12">12/8</option></select></label><label class="field"><span>Subdivision</span><select id="subdivisionSelect"><option value="1">Noire</option><option value="2">Croches</option><option value="3">Triolets</option><option value="4">Doubles croches</option></select></label><label class="field"><span>Son</span><select id="metroSoundSelect"><option value="click">Click</option><option value="wood">Wood</option><option value="soft">Doux</option></select></label><label class="field"><span>Volume</span><input id="metroVolume" type="range" min="10" max="100" value="70"></label></div><div class="custom-actions"><button class="secondary-btn" id="tapTempo">TAP</button><button class="secondary-btn" id="metroAccent">Accent : ON</button></div></article>
+</section>
+
+<section class="screen" data-screen="studio">
+  <div class="section-head"><div><p class="eyebrow">06 · STUDIO</p><h2>Atelier musical</h2></div><span class="studio-tag">NOUVEAU</span></div>
+  <p class="muted studio-intro">Compose tes grilles, lance des idées de jam, garde ton répertoire et tes réglages au même endroit.</p>
+  <div class="studio-tabs" id="studioTabs">
+    <button class="active" data-studio="composition">Composition</button><button data-studio="jam">Jam Studio</button><button data-studio="repertoire">Répertoire</button><button data-studio="tone">Tone Lab</button><button data-studio="backup">Sauvegarde</button>
+  </div>
+  <div id="studioContent"></div>
+</section>
+<section class="screen" data-screen="library"><div class="section-head"><div><p class="eyebrow">BIBLIOTHÈQUE</p><h2>Favoris & historique</h2></div></div><article class="panel"><div class="panel-head"><h3>Favoris</h3><button class="text-btn" id="clearFavorites">Vider</button></div><div id="favoritesList" class="library-list"></div></article><article class="panel"><div class="panel-head"><h3>Historique</h3><button class="text-btn" id="clearHistory">Vider</button></div><div id="historyList" class="library-list"></div></article></section>
+
+<section class="screen" data-screen="preferences"><div class="section-head"><div><p class="eyebrow">PRÉFÉRENCES</p><h2>Instrument & affichage</h2></div></div>
+<article class="panel" id="tuningPrefs"><div class="panel-head"><div><h3>Accordage</h3><p class="muted">Guitare, open, drop, basse ou personnalisé</p></div></div><label class="field"><span>Accordage actif</span><select id="tuningSelect"></select></label><div id="tuningPreview" class="tuning-preview"></div><div class="custom-actions top-gap"><button class="primary-btn" id="addTuningBtn">+ Accordage manuel</button><button class="secondary-btn" id="deleteTuningBtn">Supprimer perso.</button></div></article>
+<article class="panel"><h3>Apparence</h3><div class="settings-row"><div><strong>Thème</strong><p class="muted">Système, clair ou sombre</p></div><select id="themeSelect" class="small-select"><option value="auto">Système</option><option value="light">Clair</option><option value="dark">Sombre</option></select></div><div class="settings-row"><div><strong>Couleurs par intervalle</strong><p class="muted">Une couleur différente pour chaque intervalle</p></div><label class="switch"><input type="checkbox" id="intervalColorsToggle"><span></span></label></div><div class="settings-row"><div><strong>Forme des repères</strong><p class="muted">Rond, carré, triangle, étoile…</p></div><select id="markerShapeSelect" class="small-select"><option value="circle">Rond</option><option value="square">Carré</option><option value="diamond">Losange</option><option value="triangle">Triangle</option><option value="star">Étoile</option><option value="hex">Hexagone</option></select></div></article>
+<article class="panel" id="intervalColorsPanel"><div class="panel-head"><div><h3>Couleurs des intervalles</h3><p class="muted">Personnalisables individuellement</p></div><button class="text-btn" id="resetColors">Réinitialiser</button></div><div class="color-grid" id="intervalColorGrid"></div></article>
+<article class="panel"><div class="panel-head"><div><h3>Données personnalisées</h3><p class="muted">Stockées localement sur ton appareil</p></div></div><div class="custom-actions"><button class="primary-btn" id="prefsAddChord">+ Nouvel accord</button><button class="primary-btn" id="prefsAddScale">+ Nouvelle gamme</button></div><div id="customDataList" class="library-list top-gap"></div></article></section>
+</main>
+<nav class="bottom-nav"><button class="active" data-target="chords"><span>♬</span><small>Accords</small></button><button data-target="scales"><span>⌁</span><small>Gammes</small></button><button data-target="arpeggios"><span>⋮</span><small>Arpèges</small></button><button data-target="reverse"><span>⌕</span><small>Reverse</small></button><button data-target="tools"><span>⏱</span><small>Outils</small></button><button data-target="studio"><span>✦</span><small>Studio</small></button></nav>
+</div>
+
+<div class="fullscreen-overlay" id="neckFullscreenOverlay" hidden><div class="fullscreen-head"><div><p class="eyebrow" id="fullscreenEyebrow">MANCHE · PLEIN ÉCRAN</p><h2 id="fullscreenTitle"></h2></div><button class="icon-btn" id="closeFullscreen">×</button></div><div class="portrait-hint" id="portraitHint"></div><div id="portraitBoard" class="portrait-board-wrap"></div><div class="fullscreen-footer"><div class="segmented" id="fullscreenLabelMode"><button data-mode="notes">Notes</button><button data-mode="intervals">Intervalles</button><button data-mode="none">Masquer</button></div></div></div>
+
+<div class="modal-backdrop" id="customModal" hidden><div class="modal"><div class="panel-head"><div><p class="eyebrow">PERSONNALISÉ</p><h2 id="customModalTitle"></h2></div><button class="icon-btn" id="closeCustomModal">×</button></div><label class="field modal-field"><span>Nom</span><input id="customName" type="text" placeholder="Nom"></label><label class="field modal-field" id="customSymbolWrap"><span>Symbole</span><input id="customSymbol" type="text" placeholder="ex. maj(add♯11)"></label><div class="modal-field"><span class="field-label">Intervalles</span><p class="muted">La fondamentale est toujours incluse.</p><div id="intervalBuilder" class="interval-builder"></div></div><label class="field modal-field"><span>Libellés personnalisés (facultatif)</span><input id="customLabels" type="text" placeholder="1, 3, 5, 7"></label><button class="primary-btn full" id="saveCustomDefinition">Enregistrer</button></div></div>
+
+<div class="modal-backdrop" id="tuningModal" hidden><div class="modal"><div class="panel-head"><div><p class="eyebrow">ACCORDAGE PERSONNALISÉ</p><h2>Nouvel accordage</h2></div><button class="icon-btn" id="closeTuningModal">×</button></div><label class="field modal-field"><span>Nom</span><input id="customTuningName" type="text" placeholder="ex. Open C perso"></label><label class="field modal-field"><span>Notes de grave vers aigu</span><input id="customTuningNotes" type="text" placeholder="ex. C G C G C E"></label><p class="muted">Utilise C, C#, Db, D… séparés par des espaces. De 4 à 8 cordes.</p><button class="primary-btn full top-gap" id="saveCustomTuning">Enregistrer</button></div></div>
+<div class="toast" id="toast"></div><script src="app.js" defer></script>
+</body></html>
